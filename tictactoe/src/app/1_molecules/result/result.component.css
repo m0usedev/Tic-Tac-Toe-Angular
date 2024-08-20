@@ -1,0 +1,25 @@
+.ResultComponent {
+  width: min-content;
+  height: min-content;
+
+  h1 {
+    font-family: var(--winner-draw-font), var(--secundary-font);
+    font-size: 96px;
+    line-height: 0;
+    letter-spacing: 0;
+  }
+  
+  .winner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--warning-200-color);
+  }
+
+  .draw {
+    color: var(--secondary-200-color);
+  }
+}
+
