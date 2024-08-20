@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap');
+:root *{
+  font-family: var(--primary-font), var(--secundary-font);
+
+}
+html{
+  background-color: rgb(53, 53, 53);
+
+
+  /*COLORS*/
+  --primary-200-color   : #D9564C;
+  --secondary-200-color : #4C89D9;
+  --good-100-color      : #70E178;
+  --good-200-color      : #4CD956;
+  --good-300-color      : #29C134;
+  --good-400-color      : #1F9127;
+  --warning-100-color   : #EDEF76;
+  --warning-200-color   : #E8EB54;
+  --warning-300-color   : #E0E41B;
+  --warning-400-color   : #A8AB14;
+  --bad-50-color        : #F78888;
+  --bad-100-color       : #F46060;
+  --bad-200-color       : #F13838;
+  --bad-300-color       : #DE1010;
+  --bad-400-color       : #A60C0C;
+  --disable-50-color    : #9C9C9C;
+  --disable-400-color   : #363636;
+  /*FONTS*/
+  --primary-font   : 'Inter';
+  --secundary-font : Arial, Helvetica, sans-serif;
+  --winner-draw-font : 'Londrina Shadow'
+  /*-------------------------------*/
+}
