@@ -1,0 +1,15 @@
+<div class="BoardComponent">
+  <div
+    class="box_continer"
+    *ngFor="let box of board();let i = index; trackBy : trackByBoxes"
+  >
+    <div (click)="changeBoard(i)">
+        <app-box
+        [icon]="box.player"
+        [state]="box.state"
+      >
+      </app-box>
+    </div>
+  </div>
+
+</div>

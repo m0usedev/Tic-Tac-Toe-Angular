@@ -1,0 +1,34 @@
+<div class="ScoreComponent">
+  <div class="PointsContainer" *ngIf="endGame()?.state == 'play'">
+    <app-point
+    [points]="score()[0]"
+    [play]="play() ? false : true"
+  >
+    <svg-circle
+      [width]="20"
+      [height]="20"
+    ></svg-circle>
+  </app-point>
+  <app-point
+    [points]="score()[1]"
+    [play]="play() ? true : false"
+  >
+    <svg-x
+      [width]="20"
+      [height]="20"
+    ></svg-x>
+  </app-point>
+  </div>
+
+  <div class="EndGame" *ngIf="endGame()?.state != 'play'">
+    <app-result [result]="'winner'" *ngIf="endGame()?.state == 'winner'">
+      <app-box
+      [icon]="endGame().player"
+      state="winner"
+      >
+      </app-box>
+    </app-result>
+    <app-result [result]="'draw'" *ngIf="endGame()?.state == 'draw'">
+    </app-result>
+  </div>
+</div>
