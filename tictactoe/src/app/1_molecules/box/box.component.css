@@ -21,6 +21,7 @@
       margin: -0.53em -0.52em;
       border: 0.4em var(--border-values);
       transition: 10ms;
+      cursor: pointer;
     }
     &:active{
       background-color: var(--disable-50-color);

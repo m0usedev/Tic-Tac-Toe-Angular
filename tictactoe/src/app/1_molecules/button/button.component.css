@@ -22,6 +22,8 @@
   letter-spacing: 0;
   line-height: 0;
 
+  cursor: pointer;
+
   &:disabled {
     border-color: var(--disable-400-color);
     background-color: var(--disable-50-color);
