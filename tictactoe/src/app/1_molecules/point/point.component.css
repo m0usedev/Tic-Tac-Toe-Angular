@@ -39,6 +39,7 @@
   }
 
   &[data-play="true"] {
+    /*Animacion para indicar que jugador le toca marcar casilla*/
     --border : 5px solid black;
     --animation-seconds : 0.8s;
     .player{

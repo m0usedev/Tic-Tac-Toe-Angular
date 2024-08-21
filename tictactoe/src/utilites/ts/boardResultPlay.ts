@@ -1,17 +1,12 @@
-﻿import { Case, Player } from "./alias";
+﻿import { Player } from "./alias";
+import { Case } from "./interfaces";
 import { ResultPlay } from "./interfaces";
 import { WritableSignal } from "@angular/core";
 
-let place = 0
+let place = 0 //Sirve para iondicar en el final de la partida, si no es draw, en que fila columna o diagonal fue la victoria
 
 export function resultPlayFunc (board : Array<Case>, player : Player) : ResultPlay {
-  //1 saber si al menos 5 posiciones que no tengan el numero 2
-  //2 revisar si las filas tienen el mismo numero
-  //3 revisar si las columnas tienen el mismo numero
-  //4 revisar las diagonales
-  //5 si todas las posiciones estan completas empate
-
-  const countNumberTwo = board.filter((element: Case) => element.player != 2).length;
+  const countNumberTwo = board.filter((element: Case) => element.player != 2).length; //con esto solo comprobaremos la partida cuadno llevemos 5 movimientos
 
   if(countNumberTwo >= 5){
     if(rows(board, player))      return {state: 'winner' , player : player, typeEndGame : {type : 'rows',       place : place}}
@@ -20,21 +15,23 @@ export function resultPlayFunc (board : Array<Case>, player : Player) : ResultPl
     if(draw(board))              return {state: 'draw'   , player : 2,      typeEndGame : {type : 'draw',       place : place}}
   }
 
-  return {state: 'play'   , player : 2}
+  return {state: 'play'   , player : 2} //En caso de que no haya victoria pues se devuelve que el estado de la partida es que se sigue jugando y ningun jugadro, 2.
 }
 
-
+//Determinar si hay una victoria en las filas
 function rows (board : Array<Case>, player : Player) : boolean {
-  let row
-  let numRows = Math.sqrt(board.length)
+  let row//contador para ver si hay 3 casillas del mismo jugador en una fila
+  let numRows = Math.sqrt(board.length) //numero de filas a mirar
+  let endFor = true
 
-  for (let i = 0; i < numRows; i++) {
+  for (let i = 0; i < numRows; i++) { //recorremos las filas
     row = 0
-    for (let j = (0+i)*numRows; j < numRows*(1+i); j++) {
-      if(board[j].player == player) row++
+    for (let j = (0+i)*numRows; j < numRows*(1+i) && endFor; j++) { //recorremos cada posicion de cada fila
+      if(board[j].player == player) row++ //si el jugador que hay en la casilla es el mismo que juega es que hay punto
+      else endFor = false
     }
-    if(row == numRows) {
-      place = i
+    if(row == numRows) { //solo si el numero de casillas correctas es igual al numero de casillas a comprobar hay victoria
+      place = i //determinamos la fila en la que fue la victoria para colorear las casillas
       return true
     }
   }
@@ -42,55 +39,66 @@ function rows (board : Array<Case>, player : Player) : boolean {
   return false
 }
 
+//Comprobar si hay victoria en las columnas
 function columns (board : Array<Case>, player : Player) : boolean {
-  let columns
+  let columns//contador para ver si hay 3 casillas del mismo jugador en una columna
   let numColumns = Math.sqrt(board.length)
+  let endFor = true //Para temrinar de hacer comprobaciones si ya una casilla no cuadra con el jugador
 
-  for (let i = 0; i < numColumns; i++) {
+  for (let i = 0; i < numColumns; i++) { //recorremos las columnas
     columns = 0
-    for (let j = 0; j < numColumns; j++) {
-      if(board[j == 0 ? 0+i : (j*numColumns)+i].player == player) columns++
+    for (let j = 0; j < numColumns && endFor; j++) { //recorremos cada casilla de una columna
+      if(board[j == 0 ? 0+i : (j*numColumns)+i].player == player) columns++ //si el jugador que hay en la casilla es el mismo que juega es que hay punto
+      else endFor = false
     }
-    if(columns == numColumns) {
-      place = i
+    if(columns == numColumns) { //solo si el numero de casillas correctas es igual al numero de casillas a comprobar hay victoria
+      place = i //determinamos la columna en la que fue la victoria para colorear las casillas
       return true
     }
   }
   return false
 }
 
+//Comprobamos si hay victoria en las diagonales
 function diagonals (board : Array<Case>, player : Player) : boolean {
   let sqrtBoard = Math.sqrt(board.length)
+  let endFor = true //Para temrinar de hacer comprobaciones si ya una casilla no cuadra con el jugador
+
   //izquierda derecha
   let diagonal = 0
-  for (let i = 0; i < board.length; i+=sqrtBoard-1+2) {
+  for (let i = 0; i < board.length && endFor; i+=sqrtBoard-1+2) {//recorremos cada casilla de la diagonal
     if(board[i].player == player) diagonal++
+    else endFor = false
   }
-  if(diagonal == sqrtBoard) {
-    place = 0
+  if(diagonal == sqrtBoard) { //solo si el numero de casillas correctas es igual al numero de casillas a comprobar hay victoria
+    place = 0//determinamos la diagonal en la que fue la victoria para colorear las casillas
     return true
   }
 
   //derecha izquierda
   diagonal = 0
-  for (let i = sqrtBoard-1; i < ((sqrtBoard-1)*sqrtBoard)+1; i+=sqrtBoard-1) {
+  endFor = true
+  for (let i = sqrtBoard-1; i < ((sqrtBoard-1)*sqrtBoard)+1 && endFor; i+=sqrtBoard-1) { //recorremos cada casilla de la diagonal
     if(board[i].player == player) diagonal++
+    else endFor = false
   }
-  if(diagonal == sqrtBoard) {
-    place = 1
+  if(diagonal == sqrtBoard) { //solo si el numero de casillas correctas es igual al numero de casillas a comprobar hay victoria
+    place = 1//determinamos la diagonal en la que fue la victoria para colorear las casillas
     return true
   }
 
   return false
 }
 
+//Comrpobamos si hay empate
 function draw (board : Array<Case>) : boolean {
+  //Si todas las casillas son diferentes de 2 es que no se peude seguir jugando y es empate
   const countNumberTwo = board.filter((element: Case) => element.player != 2).length;
   if(countNumberTwo == board.length) return true
   return false
 }
 
-
+//Funcion para pintar las casillas ganadoras cuando se termia una partida
 export function printEndGame (array: Array<Case>, rp : ResultPlay, board :WritableSignal<Case[]>) {
   blockNoSelect(array, board)
   if(rp.state == 'winner') {
@@ -102,7 +110,9 @@ export function printEndGame (array: Array<Case>, rp : ResultPlay, board :Writab
   }
 }
 
+//Aqui bloqueamos la interaccion con todas aquellas casillas que aun no estan marcadas
 function blockNoSelect(array: Array<Case>, board :WritableSignal<Case[]>){
+  //ponemos en 'selected' todas las casillas con el numero 2
   const arrayMod = array.map( (num) => {
     if(num.player == 2) {
       num.state = 'selected'
@@ -112,6 +122,7 @@ function blockNoSelect(array: Array<Case>, board :WritableSignal<Case[]>){
   board.set( arrayMod )
 }
 
+//Funcion para pintar las casillas ganadoras en caso de ser una fila
 function printWinnerRows (array: Array<Case>,rp : ResultPlay, board :WritableSignal<Case[]>) {
   let numRows = Math.sqrt(array.length)
   let row = rp.typeEndGame!.place
@@ -127,6 +138,7 @@ function printWinnerRows (array: Array<Case>,rp : ResultPlay, board :WritableSig
   }
 }
 
+//Funcion para pintar las casillas ganadoras en caso de ser una columna
 function printWinnerColums (array: Array<Case>,rp : ResultPlay, board :WritableSignal<Case[]>) {
   let numColumns = Math.sqrt(array.length)
   let column = rp.typeEndGame!.place
@@ -142,6 +154,7 @@ function printWinnerColums (array: Array<Case>,rp : ResultPlay, board :WritableS
   }
 }
 
+//Funcion para pintar las casillas ganadoras en caso de ser una diagonal
 function printWinnerDiagonals (array: Array<Case>,rp : ResultPlay, board :WritableSignal<Case[]>) {
   let numDiagonals = Math.sqrt(array.length)
   let diagonal = rp.typeEndGame!.place
@@ -170,6 +183,7 @@ function printWinnerDiagonals (array: Array<Case>,rp : ResultPlay, board :Writab
   }
 }
 
+//Funcion para pintar todas las casillas cuando es un empate
 function printDraw (array: Array<Case>,rp : ResultPlay, board : WritableSignal<Case[]>) {
   let plus = 100
   for (let index = 0; index < array.length; index++) {

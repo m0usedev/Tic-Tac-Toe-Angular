@@ -17,8 +17,8 @@ import { Player, States } from '../../../utilites/ts/alias';
   templateUrl: './box.component.html',
   styleUrl: './box.component.css'
 })
-
 export class BoxComponent {
+  //componente con el que hacemos las casillas de la partida
   icon = input.required<Player>() //Playero de la casilla
   state = input.required<States>() //Estado de la box
 }

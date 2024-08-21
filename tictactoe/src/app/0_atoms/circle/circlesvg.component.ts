@@ -10,6 +10,7 @@ import { Component, input } from '@angular/core';
     </svg>`
 })
 export class CircleSvgComponent {
+  //Componente con el que pintamos el svg del cirulo
   width = input(80)
   height = input(80)
 }

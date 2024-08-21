@@ -10,6 +10,7 @@ import { Component, input } from '@angular/core';
     </svg>`
 })
 export class ReloadSvgComponent {
+  //Componente con el que pintamos el svg del reload
   width = input(20)
   height = input(20)
 }

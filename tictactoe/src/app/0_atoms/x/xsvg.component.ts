@@ -10,6 +10,7 @@ import { Component, input } from '@angular/core';
   </svg>`
 })
 export class XSvgComponent {
+  //Componente con el que pintamos el svg de la X
   width = input(80)
   height = input(80)
 }

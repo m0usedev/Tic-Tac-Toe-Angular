@@ -26,7 +26,8 @@ import { ResultPlay } from '../../../utilites/ts/interfaces';
   styleUrl: './score.component.css'
 })
 export class ScoreComponent {
-  score = input(Array.from({ length: 2 }, () => (0)))
-  play = input<Player>()
-  endGame = input<ResultPlay>({state: 'play'   , player : 2})
+  //Componente que forma el trablero de puntos de la partida y anuncia si hay ganador o empate
+  score   = input(Array.from({ length: 2 }, () => (0))) //Aqui se llevam los puntos
+  play    = input<Player>() //El jugador que ahora esta jugando
+  endGame = input<ResultPlay>({state: 'play'   , player : 2}) //Estado del resultado de la partida
 }

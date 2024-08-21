@@ -1,4 +1,5 @@
 <div class="ScoreComponent">
+  <!--En caso de que la partida se este jugando sale la puntuacion-->
   <div class="PointsContainer" *ngIf="endGame()?.state == 'play'">
     <app-point
     [points]="score()[0]"
@@ -19,7 +20,7 @@
     ></svg-x>
   </app-point>
   </div>
-
+  <!--En caso de que la partida terminase se pinta si es winner o draw-->
   <div class="EndGame" *ngIf="endGame()?.state != 'play'">
     <app-result [result]="'winner'" *ngIf="endGame()?.state == 'winner'">
       <app-box

@@ -11,5 +11,6 @@ import { Result } from '../../../utilites/ts/alias';
   styleUrl: './result.component.css'
 })
 export class ResultComponent {
+  //Anuncio de si hay ganador o es empate
   result = input.required< Result >()
 }

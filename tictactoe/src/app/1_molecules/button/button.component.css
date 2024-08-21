@@ -46,6 +46,7 @@
     background-color: var(--good-300-color);
   }
 }
+
 .Warning{
   border-color: var(--warning-400-color);
   background-color: var(--warning-200-color);
@@ -56,6 +57,7 @@
     background-color: var(--warning-300-color);
   }
 }
+
 .Bad{
   border-color: var(--bad-400-color);
   background-color: var(--bad-200-color);

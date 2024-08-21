@@ -34,6 +34,7 @@ let firstTime = true
   styleUrl: './sample.component.css'
 })
 export class SampleComponent {
+  //Componente de prueba de los componentes
   title = 'tictactoe';
 
   player : Player = 0
