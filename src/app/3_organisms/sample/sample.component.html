@@ -1,0 +1,93 @@
+<h1>buttons</h1>
+<app-button
+  [click_func]="hola"
+  type="Good"
+>
+  <svg-reload></svg-reload>
+  Texto boton
+</app-button>
+<app-button
+  [click_func]="hola"
+  type="Bad"
+>
+  <svg-reload></svg-reload>
+  Texto boton
+</app-button>
+<app-button
+  [click_func]="hola"
+  type="Warning"
+>
+  <svg-reload></svg-reload>
+  Texto boton
+</app-button>
+
+
+<h1>box</h1>
+<app-box
+  [icon]="2"
+  state="empty"
+></app-box>
+
+<app-box
+  [icon]="0"
+  state="win"
+></app-box>
+
+<app-box
+  [icon]="1"
+  state="winner"
+></app-box>
+
+<h1>point</h1>
+<app-point
+  [points]="0"
+>
+  <svg-x
+    [width]="20"
+    [height]="20"
+  ></svg-x>
+</app-point>
+<br>
+<br>
+<app-point
+  [points]="0"
+  [play]="true"
+>
+  <svg-circle
+    [width]="20"
+    [height]="20"
+  ></svg-circle>
+</app-point>
+
+<h1>result</h1>
+<app-result [result]="'winner'">
+  <app-box
+  [icon]="0"
+  state="winner"
+  >
+  </app-box>
+</app-result>
+<app-result [result]="'draw'">
+</app-result>
+
+<h1>board</h1>
+<app-board
+  (playerOut)="playerOut.set($event)"
+  (resultPlayOut)="updateScore($event)"
+></app-board>
+
+<h1>score</h1>
+<app-score
+ [score]="scoreSig()"
+ [play]="playerOut()"
+ [endGame]="resultPlayOut()"
+></app-score>
+
+<h1>reseload</h1>
+<app-button
+  [click_func]="reiniciarAplicacion"
+  type="Warning"
+>
+  <svg-reload></svg-reload>
+  Reload
+</app-button>

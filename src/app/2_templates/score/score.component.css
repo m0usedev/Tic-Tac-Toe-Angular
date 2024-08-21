@@ -1,0 +1,25 @@
+.ScoreComponent {
+  border-radius: 25px;
+  padding: 10px;
+  width: 330px;
+  height: 205px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .PointsContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .EndGame{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
