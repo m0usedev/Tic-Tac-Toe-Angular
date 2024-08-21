@@ -3,7 +3,7 @@
 Proyecto desarrollado en Angular.js para jugar partidas de Tic-Tac-Toe o Tres en Raya.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/15c0148f-5cf3-42d3-9d9a-fc8344da7a65" width="546" height="360">
+  <img src="https://github.com/user-attachments/assets/15c0148f-5cf3-42d3-9d9a-fc8344da7a65" width="600" height="360">
 </p>
 
 ## 📖 Comentarios del desarrollo:
